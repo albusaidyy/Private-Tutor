@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Private Tutor</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="reset">"In a few moments, you will receive an email with the subject line \"Reset your Private Tutor Password\"  that contains a link to reset your password." </string>
+
+    <string-array name="tutor_status">
+        <item>Available</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+    <string-array name="gender_type">
+        <item>Male</item>
+        <item>Female</item>
+
+    </string-array>
+</resources>
