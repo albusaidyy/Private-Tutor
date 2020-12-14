@@ -5,9 +5,12 @@ The application allows users to select the desired tutor, view his resources and
 This project has filled a gap for students and many will find an easier way to boost their academic performance. 
 This project has  an advantage of providing very credible and thoroughly screened qualified instructors and will be available for local higher learning students.
 
-Screenshots of the App
+A screenshot of the App.
 
-<img src="https://github.com/albusaidy05/Private-Tutor/blob/master/Screnshots/20201214_135927.png" alt="alt text" width="300" >
+<img src="https://github.com/albusaidy05/Private-Tutor/blob/master/app/src/main/launcher-web.png" alt="alt text" width="300" >
+
+More can be found below:
+https://github.com/albusaidy05/Private-Tutor/tree/master/Screnshots
 
 
 
