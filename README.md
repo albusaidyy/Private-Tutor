@@ -7,7 +7,7 @@ This project has  an advantage of providing very credible and thoroughly screene
 
 Screenshots of the App
 
-<img src="https://github.com/albusaidy05/Private-Tutor/blob/master/Screnshots/20201214_135927.png" alt="alt text" width="200" >
+<img src="https://github.com/albusaidy05/Private-Tutor/blob/master/Screnshots/20201214_135927.png" alt="alt text" width="300" >
 
 
 
