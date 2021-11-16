@@ -1,4 +1,6 @@
-# Private-Tutor
+<img src="https://github.com/albusaidyy/Private-Tutor/blob/master/app/src/main/launcher-web.png" alt="Logo mage"  width="100">
+
+# Private-Tutor 
 
 The key objective of this project was to create a platform that provided tutors to as many users as possible with much ease regardless of geographical location by use of mobile computing technology. 
 
