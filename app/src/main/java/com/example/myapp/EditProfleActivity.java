@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class EditProfleActivity extends AppCompatActivity {
 
@@ -38,17 +39,11 @@ public class EditProfleActivity extends AppCompatActivity {
     private EditText newEdlevel;
     private EditText newPhoneNumber;
     private EditText newAdress;
-    private TextView ChangePass;
 
     private ImageView userProfile;
-    private Button save;
 
-    private static int PICK_IMAGE = 123;
+    private static final int PICK_IMAGE = 123;
 
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase firebaseDatabase;
-    private FirebaseStorage firebaseStorage;
-    private StorageReference storageReference;
     Uri imagePath;
 
     //converts image to uri
@@ -80,15 +75,15 @@ public class EditProfleActivity extends AppCompatActivity {
         newPhoneNumber = findViewById(R.id.EdPhoneUpdate);
         newAdress = findViewById(R.id.EdAddressUpdate);
         userProfile = findViewById(R.id.profile);
-        ChangePass = findViewById(R.id.TvchangePass);
+        TextView changePass = findViewById(R.id.TvchangePass);
 
 
-        save = findViewById(R.id.btnsaveUpdate);
+        Button save = findViewById(R.id.btnsaveUpdate);
 
-        mAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
 
 
         //picking the image from  gallery
@@ -106,7 +101,7 @@ public class EditProfleActivity extends AppCompatActivity {
 
         //reading the userdata
         final DatabaseReference myRef = firebaseDatabase.getReference("Users/" + mAuth.getUid());
-        final StorageReference imageRef = storageReference.child("images").child("Users").child(mAuth.getUid()).child("Profile pic");// userId/images/profile_pic.png
+        final StorageReference imageRef = storageReference.child("images").child("Users").child(Objects.requireNonNull(mAuth.getUid())).child("Profile pic");// userId/images/profile_pic.png
 
         //reading the profile image from storage
 
@@ -125,6 +120,7 @@ public class EditProfleActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                assert userProfile != null;
                 newUserName.setText(userProfile.getUserName());
                 newEdlevel.setText(userProfile.getEducLevel());
                 newPhoneNumber.setText(userProfile.getUserPhone());
@@ -156,25 +152,21 @@ public class EditProfleActivity extends AppCompatActivity {
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditProfleActivity.this, "Image update failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfleActivity.this, "I" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
 
                         }
-                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(EditProfleActivity.this, "Image Successfully added", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    }).addOnSuccessListener(taskSnapshot -> Toast.makeText(EditProfleActivity.this, "Image Successfully added", Toast.LENGTH_SHORT).show());
                 }
 
                 Toast.makeText(EditProfleActivity.this,"Profile updated",Toast.LENGTH_SHORT).show();
-                finish();
+               startActivity(new Intent(EditProfleActivity.this,ProfileActivity.class));
+               finish();
 
             }
         });
 
-        ChangePass.setOnClickListener(new View.OnClickListener() {
+        changePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity( new Intent (EditProfleActivity.this,ChangePassword.class));

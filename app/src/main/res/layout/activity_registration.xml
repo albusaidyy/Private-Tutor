@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
         >
 
 
@@ -23,11 +23,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create a new Account"
-            android:layout_marginTop="35dp"
+            android:layout_margin="40dp"
             android:gravity="center"
             android:textColor="@android:color/background_dark"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:src="@drawable/ic_reg"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -93,4 +99,4 @@
 
 
     </LinearLayout>
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

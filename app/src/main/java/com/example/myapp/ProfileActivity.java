@@ -2,9 +2,9 @@ package com.example.myapp;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -74,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         DatabaseReference myRef = firebaseDatabase.getReference("Users/" + mAuth.getUid());
 
         //reading profile image
-        final StorageReference imageRef = storageReference.child("images").child("Users").child(mAuth.getUid()).child("Profile pic");// userId/images/profile_pic.png
+        final StorageReference imageRef = storageReference.child("images").child("Users").child(Objects.requireNonNull(mAuth.getUid())).child("Profile pic");// userId/images/profile_pic.png
         Task<Uri> downUri = imageRef.getDownloadUrl();
                 downUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -89,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                assert userProfile != null;
                 profileName.setText(userProfile.getUserName());
                 profileEdLevel.setText( userProfile.getEducLevel());
                 profilePhone.setText(userProfile.getUserPhone());
@@ -109,6 +111,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ProfileActivity.this,EditProfleActivity.class));
+                finish();
             }
         });
     }

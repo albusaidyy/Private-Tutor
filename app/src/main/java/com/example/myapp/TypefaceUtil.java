@@ -1,11 +1,12 @@
 package com.example.myapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import java.lang.reflect.Field;
 
-import static android.support.constraint.motion.utils.Oscillator.TAG;
 
 public class TypefaceUtil {
 
